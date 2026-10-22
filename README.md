@@ -30,3 +30,10 @@ lib/
 ├── services/
 │   └── bmkg_service.dart       # Layanan HTTP request API, caching, & error handling
 └── main.dart                   # Entry point aplikasi & konfigurasi tema Material 3
+
+## Langkah Menjalankan Aplikasi
+1. Pastikan **Flutter SDK** sudah terinstal dan terkonfigurasi dengan baik di komputer Anda.
+2. Buka folder project `cuaca_bmkg_uts` menggunakan IDE favorit Anda (seperti **Android Studio** atau **Visual Studio Code**).
+3. Buka terminal di dalam IDE tersebut, lalu jalankan perintah berikut untuk mengunduh seluruh dependensi atau *package* yang dibutuhkan:
+   ```bash
+   flutter pub get
