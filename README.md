@@ -1,17 +1,32 @@
-# cuaca_bmkg_uts
+# BMKG Info: Cuaca & Gempa (cuaca_bmkg_uts)
 
-A new Flutter project.
+## Deskripsi Singkat Aplikasi
+**BMKG Info: Cuaca & Gempa** adalah aplikasi mobile berbasis Flutter dan Dart yang menyajikan informasi prakiraan cuaca multi-wilayah serta pemantauan aktivitas gempa bumi secara *real-time* di Indonesia. Aplikasi ini mengintegrasikan data dinamis dari API terbuka Badan Meteorologi, Klimatologi, dan Geofisika (BMKG) serta API referensi wilayah administrasi Indonesia dalam antarmuka pengguna yang informatif dan interaktif.
 
-## Getting Started
+## Fitur Utama
+1. **Pemilih Wilayah Dinamis (Multi-Region Selector):** Memilih Provinsi, Kabupaten/Kota, dan Kecamatan di seluruh Indonesia secara berjenjang untuk melihat cuaca spesifik wilayah terkait.
+2. **Prakiraan Cuaca 3 Hari & Highlight Cuaca Terkini:** Menampilkan suhu udara (°C), kondisi cuaca, kelembapan (%), kecepatan & arah angin, jarak pandang, persentase tutupan awan, serta jadwal cuaca per 3 jam selama 3 hari ke depan.
+3. **Peta Interaktif Episentrum Gempa Bumi:** Visualisasi geografis titik pusat gempa terbaru dan 15 gempa terkini (M ≥ 5.0) di atas peta interaktif OpenStreetMap dengan fitur fokus kamera saat penanda (*marker*) atau daftar gempa diketuk.
+4. **Informasi Detail Gempa Real-Time:** Menyajikan parameter lengkap meliputi magnitudo, kedalaman, waktu kejadian, koordinat lintang & bujur, lokasi wilayah pusat gempa, potensi tsunami, dan skala guncangan dirasakan (MMI).
+5. **Manajemen Cache & Asynchronous State Handling:** Mendukung penyimpanan *in-memory cache*, *pull-to-refresh* (`RefreshIndicator`), *auto-retry* saat terjadi pembatasan server (HTTP 429), serta penanganan kondisi *Loading*, *Success*, dan *Error* menggunakan `FutureBuilder`.
 
-This project is a starting point for a Flutter application.
+## Teknologi & Package yang Digunakan
+* **Framework & Bahasa:** Flutter SDK (Material 3) & Dart
+* **`http`:** Melakukan permintaan HTTP GET ke REST API BMKG dan API wilayah Indonesia.
+* **`flutter_map`:** Menampilkan peta interaktif berbasis OpenStreetMap (`TileLayer` & `MarkerLayer`).
+* **`latlong2`:** Mengelola struktur data koordinat geografis (`LatLng`) untuk pemetaan titik gempa.
+* **`dart:convert`:** Mengonversi (*decoding*) respons JSON menjadi objek model Dart.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Struktur Direktori Utama (`lib/`)
+```text
+lib/
+├── models/
+│   ├── earthquake_model.dart   # Model data gempa bumi BMKG
+│   └── weather_model.dart      # Model data lokasi dan prakiraan cuaca BMKG
+├── screens/
+│   ├── main_screen.dart        # Navigasi utama aplikasi (Bottom Navigation Bar)
+│   ├── weather_screen.dart     # Halaman antarmuka Prakiraan Cuaca
+│   └── earthquake_screen.dart  # Halaman antarmuka Peta & Info Gempa
+├── services/
+│   └── bmkg_service.dart       # Layanan HTTP request API, caching, & error handling
+└── main.dart                   # Entry point aplikasi & konfigurasi tema Material 3
